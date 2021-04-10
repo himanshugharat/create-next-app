@@ -1,11 +1,25 @@
-const Tet=()=>{
-    return(
-        <div>
-            <h1>Tetaaaa</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum alias dolorem nisi earum. Nulla, dolores, enim minus voluptas, excepturi expedita ratione similique officiis veritatis officia harum? Culpa nobis impedit quidem?</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum alias dolorem nisi earum. Nulla, dolores, enim minus voluptas, excepturi expedita ratione similique officiis veritatis officia harum? Culpa nobis impedit quidem?</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum alias dolorem nisi earum. Nulla, dolores, enim minus voluptas, excepturi expedita ratione similique officiis veritatis officia harum? Culpa nobis impedit quidem?</p>
-        </div>
-    )
-}
+import style from "../../styles/ninja.module.css";
+export const getStaticProps = async () => {
+  const re = await fetch("https://jsonplaceholder.typicode.com/users");
+  const data = await re.json();
+  return {
+    props: { ninja: data },
+  };
+};
+const Tet = ({ ninja }) => {
+  return (
+    <div>
+      <h1>Ninja</h1>
+      {ninja.map((re) => {
+        return (
+          <div key={re.id}>
+            <a className={style.single}>
+              <h3>{re.name}</h3>
+            </a>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
 export default Tet;
